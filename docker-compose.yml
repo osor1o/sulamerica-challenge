@@ -1,0 +1,8 @@
+version: "3.3"
+
+services:
+  font_end:
+    container_name: sulamerica_challenge_font_end
+    build: ./front-end
+    ports:
+      - 8080:80
