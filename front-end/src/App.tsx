@@ -24,7 +24,7 @@ export const App = () => {
         <ThemeProvider theme={theme}>
           <SnackbarProvider maxSnack={3}>
             <MuiPickersUtilsProvider utils={MomentUtils} locale={locale}>
-              <Router>
+              <Router basename={process.env.PUBLIC_URL}>
                 <Header />
                 <Container
                   style={{

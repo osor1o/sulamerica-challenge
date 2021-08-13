@@ -2,6 +2,7 @@
   "name": "front-end",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://osor1o.github.io/sulamerica-challenge/",
   "dependencies": {
     "@date-io/moment": "^1.3.13",
     "@material-ui/core": "^4.12.3",
@@ -31,7 +32,9 @@
     "test": "react-app-rewired test ",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "jest": {
     "moduleNameMapper": {
@@ -76,6 +79,7 @@
     "@storybook/react": "^6.3.6",
     "@types/react-router-dom": "^5.1.8",
     "csstype": "^3.0.8",
+    "gh-pages": "^3.2.3",
     "normalize.css": "^8.0.1",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
