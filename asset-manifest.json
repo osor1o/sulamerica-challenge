@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/sulamerica-challenge/static/js/main.dc23d0f0.chunk.js",
-    "main.js.map": "/sulamerica-challenge/static/js/main.dc23d0f0.chunk.js.map",
+    "main.js": "/sulamerica-challenge/static/js/main.d86f7981.chunk.js",
+    "main.js.map": "/sulamerica-challenge/static/js/main.d86f7981.chunk.js.map",
     "runtime-main.js": "/sulamerica-challenge/static/js/runtime-main.fa975472.js",
     "runtime-main.js.map": "/sulamerica-challenge/static/js/runtime-main.fa975472.js.map",
     "static/css/2.679831fc.chunk.css": "/sulamerica-challenge/static/css/2.679831fc.chunk.css",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.fa975472.js",
     "static/css/2.679831fc.chunk.css",
     "static/js/2.671ab737.chunk.js",
-    "static/js/main.dc23d0f0.chunk.js"
+    "static/js/main.d86f7981.chunk.js"
   ]
 }
