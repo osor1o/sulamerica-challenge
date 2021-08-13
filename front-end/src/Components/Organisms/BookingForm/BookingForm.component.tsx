@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Grid, Button, Typography } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import {
@@ -10,18 +10,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { DatePicker } from "@/Components/Molecules/DatePicker";
 import { Date, toDate } from "@/Utils/Date";
 
-const lastValues = {
-  pickupDate: toDate(),
-  returnDate: toDate().add(1, "day"),
-};
-
 export const BookingForm: FC<BookingFormProps> = ({ onSubmit }) => {
+  const [lastValues, setLastValues] = useState<BookingFormData>({
+    pickupDate: toDate(),
+    returnDate: toDate().add(1, "day"),
+  });
+
   const {
     control,
     handleSubmit,
     watch,
-    formState: { isSubmitting },
     setValue,
+    formState: { isSubmitting },
   } = useForm<BookingFormData>({
     defaultValues: lastValues,
     resolver: yupResolver(validationSchema),
@@ -39,11 +39,19 @@ export const BookingForm: FC<BookingFormProps> = ({ onSubmit }) => {
       if (lastValues.returnDate !== returnDate) {
         setValue("pickupDate", toDate(returnDate).subtract(1, "day"));
       }
-
-      lastValues.pickupDate = pickupDate;
-      lastValues.returnDate = returnDate;
     }
-  }, [pickupDate, returnDate, setValue]);
+
+    setLastValues({
+      pickupDate,
+      returnDate,
+    });
+  }, [
+    pickupDate,
+    returnDate,
+    setValue,
+    lastValues.pickupDate,
+    lastValues.returnDate,
+  ]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit!)}>
