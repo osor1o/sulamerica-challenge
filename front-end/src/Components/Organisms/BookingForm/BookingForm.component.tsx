@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useMemo, useEffect, useState } from "react";
 import { Grid, Button, Typography } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import {
@@ -27,6 +27,7 @@ export const BookingForm: FC<BookingFormProps> = ({ onSubmit }) => {
     resolver: yupResolver(validationSchema),
   });
 
+  const today = useMemo(() => toDate(), []);
   const pickupDate = watch("pickupDate") as Date;
   const returnDate = watch("returnDate") as Date;
 
@@ -37,7 +38,11 @@ export const BookingForm: FC<BookingFormProps> = ({ onSubmit }) => {
       }
 
       if (lastValues.returnDate !== returnDate) {
-        setValue("pickupDate", toDate(returnDate).subtract(1, "day"));
+        const newPickupDate = toDate(returnDate);
+        if (newPickupDate > today) {
+          newPickupDate.subtract(1, "day");
+        }
+        setValue("pickupDate", newPickupDate);
       }
     }
 
@@ -51,6 +56,7 @@ export const BookingForm: FC<BookingFormProps> = ({ onSubmit }) => {
     setValue,
     lastValues.pickupDate,
     lastValues.returnDate,
+    today,
   ]);
 
   return (
@@ -64,7 +70,7 @@ export const BookingForm: FC<BookingFormProps> = ({ onSubmit }) => {
             label="Data de retirada"
             control={control}
             name="pickupDate"
-            minDate={toDate()}
+            minDate={today}
           />
         </Grid>
         <Grid item>
@@ -72,7 +78,7 @@ export const BookingForm: FC<BookingFormProps> = ({ onSubmit }) => {
             label="Data de devolução"
             control={control}
             name="returnDate"
-            minDate={toDate()}
+            minDate={today}
           />
         </Grid>
         <Grid item>
