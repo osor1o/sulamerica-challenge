@@ -72,6 +72,7 @@ export const BookingForm: FC<BookingFormProps> = ({ onSubmit }) => {
             label="Data de devolução"
             control={control}
             name="returnDate"
+            minDate={toDate()}
           />
         </Grid>
         <Grid item>
