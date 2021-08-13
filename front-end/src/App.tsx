@@ -1,9 +1,15 @@
+import { FC } from "react";
 import { Container, ThemeProvider } from "@material-ui/core";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { SnackbarProvider } from "notistack";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { HashRouter as Router } from "react-router-dom";
+import {
+  HashRouter,
+  HashRouterProps,
+  BrowserRouter,
+  BrowserRouterProps,
+} from "react-router-dom";
 import { store, persistor } from "@/Store";
 import { theme } from "@/Theme";
 import { Routes } from "@/Routes";
@@ -17,6 +23,16 @@ import "normalize.css";
 const locale = "pt-br";
 moment.locale(locale);
 
+const RouterComponent: FC<HashRouterProps | BrowserRouterProps> = ({
+  ...props
+}) => {
+  return process.env.REACT_APP_USE_HASH_ROUTER === "true" ? (
+    <HashRouter {...props} />
+  ) : (
+    <BrowserRouter {...props} />
+  );
+};
+
 export const App = () => {
   return (
     <Provider store={store}>
@@ -24,7 +40,7 @@ export const App = () => {
         <ThemeProvider theme={theme}>
           <SnackbarProvider maxSnack={3}>
             <MuiPickersUtilsProvider utils={MomentUtils} locale={locale}>
-              <Router basename={process.env.PUBLIC_URL}>
+              <RouterComponent>
                 <Header />
                 <Container
                   style={{
@@ -34,7 +50,7 @@ export const App = () => {
                 >
                   <Routes />
                 </Container>
-              </Router>
+              </RouterComponent>
             </MuiPickersUtilsProvider>
           </SnackbarProvider>
         </ThemeProvider>

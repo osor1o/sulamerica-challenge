@@ -2,7 +2,6 @@
   "name": "front-end",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://osor1o.github.io/sulamerica-challenge/",
   "dependencies": {
     "@date-io/moment": "^1.3.13",
     "@material-ui/core": "^4.12.3",
@@ -33,13 +32,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "predeploy": "npm run build",
+    "predeploy": "REACT_APP_USE_HASH_ROUTER=true PUBLIC_URL='/sulamerica-challenge' npm run build",
     "deploy": "gh-pages -d build"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "@/(.*)": "<rootDir>/src/$1"
-    }
   },
   "eslintConfig": {
     "extends": [
